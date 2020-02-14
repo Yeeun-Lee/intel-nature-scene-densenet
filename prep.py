@@ -12,7 +12,7 @@ class dataset():
 
         images = []
         labels = []
-        for folder in tqdm(os.listdir(self.base_dir+"train")):
+        for folder in (os.listdir(self.base_dir+"train"):
             for file in os.listdir(self.base_dir+"train/"+folder):
                 img  = cv2.imread(self.base_dir+"train/"+folder+"/"+file)
                 img = cv2.resize(img, self.size)
@@ -27,7 +27,7 @@ class dataset():
     def test(self):
         images = []
         index = []
-        for file in tqdm(os.listdir(self.base_dir+"test")):
+        for file in (os.listdir(self.base_dir+"test"):
             img = cv2.imread(self.base_dir+"train/"+file)
             img = cv2.resize(img, self.size)
             images.append(img)
