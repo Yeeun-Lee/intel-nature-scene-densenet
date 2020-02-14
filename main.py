@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from keras.utils import np_utils
 from keras.preprocessing.image import ImageDataGenerator
 import keras.backend as K
-
+from keras.optimizers import RMSprop
 file_path = 'content/parrot_proj1/scoring/'
 
 
@@ -22,6 +22,7 @@ def run_model():
     model = DenseNet(nb_blocks=4, nb_filters=128, depth=40,
                      growth_rate=12, compression=0.2, input_shape=(150, 150),
                      )
+    model.compile(loss='categorical_crossentropy', optimizer=RMSprop(lr=2e-5))
     model.summary()
     datagen = ImageDataGenerator(
             featurewise_center=False,  # set input mean to 0 over the dataset
