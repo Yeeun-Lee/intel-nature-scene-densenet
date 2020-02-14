@@ -4,11 +4,10 @@ import pandas as pd
 import os
 import tqdm
 
-class dataset:
-    def __init__(self):
-        self.base_dir = '/content/parrot_proj1/'
-        self.size = (150, 150)
-    @classmethod
+class dataset():
+    def __init__(self, base_dir = '/content/parrot_proj1/', size = (150, 150)):
+        self.base_dir = base_dir
+        self.size = size
     def train(self):
 
         images = []

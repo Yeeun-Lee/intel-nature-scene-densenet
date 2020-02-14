@@ -41,11 +41,3 @@ def run_model():
                                steps_per_epoch=x_train.shape[0]//64, epochs=20,
                                validation_data=(x_valid, y_valid))
     return model, hist
-if __name__=="__main__":
-    model, history = run_model()
-    test, index = dataset.test()
-    y_pred = model.predict(test)
-    y_pred = np.argmax(y_pred, axis=1)
-    result = pd.DataFrame({'id':index, 'pred_label':y_pred})
-    result = result.set_index('id')
-    submit = result.to_csv(file_path+'prediction.csv', encoding='utf-8')
