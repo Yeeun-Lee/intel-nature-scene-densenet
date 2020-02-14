@@ -19,7 +19,7 @@ def run_model():
     print("x_valid shape : ", x_valid.shape)
     print("y_valid shape : ", y_train.shape)
     print("y_valid shape : ", y_valid.shape)
-    model = DenseNet(nb_blocks=4, nb_filters=128, depth=40,
+    model = DenseNet(num_class=6, nb_blocks=4, nb_filters=128, depth=40,
                      growth_rate=12, compression=0.2, input_shape=(150, 150),
                      )
     model.compile(loss='categorical_crossentropy', optimizer=RMSprop(lr=2e-5))
