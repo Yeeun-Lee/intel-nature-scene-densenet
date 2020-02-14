@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import pandas as pd
 import os
-import tqdm
+from tqdm import tqdm
 
 class dataset():
     def __init__(self, base_dir = '/content/parrot_proj1/', size = (150, 150)):
