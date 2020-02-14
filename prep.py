@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import pandas as pd
 import os
-import tqdm
+from tqdm import tqdm
 
 class dataset():
     def __init__(self, base_dir = '/content/parrot_proj1/', size = (150, 150)):
@@ -12,7 +12,7 @@ class dataset():
 
         images = []
         labels = []
-        for folder in (os.listdir(self.base_dir+"train"):
+        for folder in tqdm(os.listdir(self.base_dir+"train")):
             for file in os.listdir(self.base_dir+"train/"+folder):
                 img  = cv2.imread(self.base_dir+"train/"+folder+"/"+file)
                 img = cv2.resize(img, self.size)
@@ -27,7 +27,7 @@ class dataset():
     def test(self):
         images = []
         index = []
-        for file in (os.listdir(self.base_dir+"test"):
+        for file in tqdm(os.listdir(self.base_dir+"test")):
             img = cv2.imread(self.base_dir+"train/"+file)
             img = cv2.resize(img, self.size)
             images.append(img)
