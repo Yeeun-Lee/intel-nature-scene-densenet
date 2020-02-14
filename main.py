@@ -11,7 +11,7 @@ file_path = 'content/parrot_proj1/scoring/'
 
 
 def run_model():
-    x_train, y_train = dataset.train()
+    x_train, y_train = dataset().train()
     y_train = np_utils.to_categorical(y_train, 6)
     x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train,
                                                           test_size=0.2)
