@@ -50,7 +50,7 @@ def DenseNet(num_class, nb_blocks = 4, nb_filters = 128, depth = 40, growth_rate
     for idx in range(nb_blocks-1):
         stage = idx +2 # start from 2 conv
         x = dense_block(x, stage, nb_layers, growth_rate = growth_rate,
-                        weight_decay = weight_decay, c)
+                        weight_decay = weight_decay)
         x = transition_layer(x, stage, nb_filters, weight_decay)
         nb_filters = int(nb_filters*compression)
     final_stage = stage+1
