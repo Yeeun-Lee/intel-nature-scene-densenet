@@ -9,15 +9,21 @@ import keras
 import keras.backend as K
 import tensorflow as tf
 
-def DenseNet(nb_blocks = 4, nb_filters = 128, depth = 40, growth_rate = 12, compression = 1,
-             input_shape = (150, 150), channel = 3, weight_decay = 1e-4):
+def DenseNet(num_class, nb_blocks = 4, nb_filters = 128, depth = 40, growth_rate = 12, compression = 1,
+             input_shape = (150, 150), channel = 3, weight_decay = 1e-4,
+             include_top = False):
     """
+    num_class = number of classes of your label data,
     nb_blocks = num of stages(num of dense blocks),
     nb_filters = initial num of filters(compressed after)
     denpth = L, growth_rate = k,
     H(l) = composite function,
     compression = 1(default),
-    input_shape = (150, 150)(default)
+    input_shape = (150, 150)(default),
+    channel = image's RGB channel,
+    weight_decay = used in kernel_regularizer,
+    include_top = based on keras DenseNet121, if it is true, it includes
+    fully connected layer
     """
     global concat_axis
     if K.image_data_format() =='channels_last':
@@ -44,7 +50,7 @@ def DenseNet(nb_blocks = 4, nb_filters = 128, depth = 40, growth_rate = 12, comp
     for idx in range(nb_blocks-1):
         stage = idx +2 # start from 2 conv
         x = dense_block(x, stage, nb_layers, growth_rate = growth_rate,
-                        weight_decay = weight_decay)
+                        weight_decay = weight_decay, c)
         x = transition_layer(x, stage, nb_filters, weight_decay)
         nb_filters = int(nb_filters*compression)
     final_stage = stage+1
@@ -55,7 +61,9 @@ def DenseNet(nb_blocks = 4, nb_filters = 128, depth = 40, growth_rate = 12, comp
                            name='conv'+str(final_stage)+'_tr_bn')(x)
     x = Activation('relu', name='relu'+str(final_stage)+'_tr')(x)
     x = GlobalAveragePooling2D(name='pool'+str(final_stage)+'_cls')(x)
-    x = Activation('softmax', name='prob')(x)
+    if include_top:
+        x = Dense(num_class, activation='softmax')(x)
+
     model = Model(input = img_input, output = x, name='densenet')
     return model
 
