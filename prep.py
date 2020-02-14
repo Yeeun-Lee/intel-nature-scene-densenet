@@ -8,6 +8,7 @@ class dataset:
     def __init__(self):
         self.base_dir = '/content/parrot_proj1/'
         self.size = (150, 150)
+    @classmethod
     def train(self):
 
         images = []
@@ -23,6 +24,7 @@ class dataset:
         images - np.true_divide(images, 255)
         print(images.shape)
         return images, labels
+    @classmethod
     def test(self):
         images = []
         index = []
