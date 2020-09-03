@@ -1,4 +1,4 @@
-# parrot_proj1 - DenseNet
+# parrot_vision_competition - DenseNet
 
 DenseNet recreation based on Densely connected Convolutional Network(https://arxiv.org/pdf/1608.06993.pdf)
 ```
